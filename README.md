@@ -15,8 +15,6 @@ A cryptographically secure password generator.
 usage: main.py [-h] [-l LENGTH] [-e ENTROPY] [-n COUNT] [--no-lower] [--no-upper] [--no-digits] [--no-symbols] [--exclude-ambiguous] [--quiet] [--clipboard]
                [--clear-after SECONDS]
 
-Password Generator
-
 options:
   -h, --help            show this help message and exit
   -l, --length LENGTH   explicit length, overrides --entropy

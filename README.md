@@ -2,13 +2,17 @@
 
 A cryptographically secure password generator.
 
-## How it works
+## How
 
 1. **Charset construction**: builds a character set from the enabled classes (lowercase, uppercase, digits, symbols). `--exclude-ambiguous` strips visually confusable characters (`I`, `l`, `1`, `O`, `0`, etc.).
 2. **Length from entropy**: computes `bits_per_char = log2(charset_size)`, then `length = ceil(target_entropy / bits_per_char)`. Default target: 256 bits.
 3. **Character selection**: each character is drawn independently via `secrets.choice()`, Python's CSPRNG (backed by `os.urandom`). No pattern, no reuse of prior output, uniform over the charset.
 4. **Post-quantum margin**: displays `entropy / 2`, since Grover's algorithm gives a quadratic speedup on brute-force search, halving effective security bits.
 5. **Clipboard mode** (`--clipboard`): copies the password via `pyperclip` instead of printing it. `--clear-after N` wipes the clipboard after N seconds, but only if it still holds the password you generated (won't clobber something else you copied since).
+
+## Why
+
+Most password generators only account for classical brute force; this one targets 256 bits of entropy specifically because Grover's algorithm halves effective key strength on a quantum computer, leaving a 128-bit post-quantum margin that stays safely out of reach of any realistic brute-force attack, classical or quantum, for the foreseeable future.
 
 ## Usage
 ```bash

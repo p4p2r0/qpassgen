@@ -62,7 +62,7 @@ def copy_to_clipboard(password, clear_after):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Cryptographically secure password generator")
+    parser = argparse.ArgumentParser(description="Password Generator")
     parser.add_argument("-l", "--length", type=int, help="explicit length, overrides --entropy")
     parser.add_argument("-e", "--entropy", type=int, default=256, help="target entropy in bits (default: 256)")
     parser.add_argument("-n", "--count", type=int, default=1, help="number of passwords to generate")

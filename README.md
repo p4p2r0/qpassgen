@@ -2,8 +2,6 @@
 
 A cryptographically secure password generator.
 
-![Screenshot](assets/screenshot.png)
-
 ## How it works
 
 1. **Charset construction**: builds a character set from the enabled classes (lowercase, uppercase, digits, symbols). `--exclude-ambiguous` strips visually confusable characters (`I`, `l`, `1`, `O`, `0`, etc.).
@@ -13,12 +11,27 @@ A cryptographically secure password generator.
 5. **Clipboard mode** (`--clipboard`): copies the password via `pyperclip` instead of printing it. `--clear-after N` wipes the clipboard after N seconds, but only if it still holds the password you generated (won't clobber something else you copied since).
 
 ## Usage
-
 ```bash
-python main.py                          # 256-bit target, all character classes
-python main.py -e 384 -n 5              # 5 passwords at 384-bit target
-python main.py -l 32 --exclude-ambiguous
-python main.py --clipboard --clear-after 20
+usage: main.py [-h] [-l LENGTH] [-e ENTROPY] [-n COUNT] [--no-lower] [--no-upper] [--no-digits] [--no-symbols] [--exclude-ambiguous] [--quiet] [--clipboard]
+               [--clear-after SECONDS]
+
+Password Generator
+
+options:
+  -h, --help            show this help message and exit
+  -l, --length LENGTH   explicit length, overrides --entropy
+  -e, --entropy ENTROPY
+                        target entropy in bits (default: 256)
+  -n, --count COUNT     number of passwords to generate
+  --no-lower
+  --no-upper
+  --no-digits
+  --no-symbols
+  --exclude-ambiguous   drop chars like I, l, 1, O, 0
+  --quiet               print only the password(s)
+  --clipboard           copy to clipboard instead of printing it
+  --clear-after SECONDS
+                        auto-clear clipboard after N seconds
 ```
 
 ## Installation

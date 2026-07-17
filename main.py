@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 import argparse
 import math
 import secrets
@@ -63,17 +64,40 @@ def copy_to_clipboard(password, clear_after):
 
 def main():
     parser = argparse.ArgumentParser(description="Password Generator")
-    parser.add_argument("-l", "--length", type=int, help="explicit length, overrides --entropy")
-    parser.add_argument("-e", "--entropy", type=int, default=256, help="target entropy in bits (default: 256)")
-    parser.add_argument("-n", "--count", type=int, default=1, help="number of passwords to generate")
+    parser.add_argument(
+        "-l", "--length", type=int, help="explicit length, overrides --entropy"
+    )
+    parser.add_argument(
+        "-e",
+        "--entropy",
+        type=int,
+        default=256,
+        help="target entropy in bits (default: 256)",
+    )
+    parser.add_argument(
+        "-n", "--count", type=int, default=1, help="number of passwords to generate"
+    )
     parser.add_argument("--no-lower", action="store_true")
     parser.add_argument("--no-upper", action="store_true")
     parser.add_argument("--no-digits", action="store_true")
     parser.add_argument("--no-symbols", action="store_true")
-    parser.add_argument("--exclude-ambiguous", action="store_true", help="drop chars like I, l, 1, O, 0")
-    parser.add_argument("--quiet", action="store_true", help="print only the password(s)")
-    parser.add_argument("--clipboard", action="store_true", help="copy to clipboard instead of printing it")
-    parser.add_argument("--clear-after", type=int, metavar="SECONDS", help="auto-clear clipboard after N seconds")
+    parser.add_argument(
+        "--exclude-ambiguous", action="store_true", help="drop chars like I, l, 1, O, 0"
+    )
+    parser.add_argument(
+        "--quiet", action="store_true", help="print only the password(s)"
+    )
+    parser.add_argument(
+        "--clipboard",
+        action="store_true",
+        help="copy to clipboard instead of printing it",
+    )
+    parser.add_argument(
+        "--clear-after",
+        type=int,
+        metavar="SECONDS",
+        help="auto-clear clipboard after N seconds",
+    )
     args = parser.parse_args()
 
     if args.clipboard and args.count > 1:
@@ -82,7 +106,11 @@ def main():
         sys.exit("error: --clear-after requires --clipboard")
 
     charset = build_charset(
-        args.no_lower, args.no_upper, args.no_digits, args.no_symbols, args.exclude_ambiguous
+        args.no_lower,
+        args.no_upper,
+        args.no_digits,
+        args.no_symbols,
+        args.exclude_ambiguous,
     )
     bits_per_char = math.log2(len(charset))
     length = args.length if args.length else required_length(args.entropy, len(charset))
@@ -95,7 +123,9 @@ def main():
         print(f"Bits per character  : {bits_per_char:.3f}")
         print(f"Password length     : {length}")
         print(f"Classical entropy   : {classical_bits:.1f} bits")
-        print(f"Post-quantum margin : {pq_bits:.1f} bits (Grover's algorithm halves effective security)")
+        print(
+            f"Post-quantum margin : {pq_bits:.1f} bits (Grover's algorithm halves effective security)"
+        )
         print()
 
     if args.clipboard:
@@ -109,4 +139,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    

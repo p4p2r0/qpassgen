@@ -12,7 +12,7 @@ A cryptographically secure password generator.
 
 ## Why
 
-Most password generators only account for classical brute force; this one targets 256 bits of entropy specifically because Grover's algorithm halves effective key strength on a quantum computer, leaving a 128-bit post-quantum margin that stays safely out of reach of any realistic brute-force attack, classical or quantum, for the foreseeable future.
+Passwords generated today can end up stored or intercepted for years, so they need to hold up against attacks that don't exist yet, not just the ones that do. Grover's algorithm halves effective key strength on a quantum computer, so the default entropy target is set to 256 bits. That leaves 128 bits post-quantum, out of reach of any brute-force attack, classical or quantum, for the foreseeable future.
 
 ## Usage
 ```bash

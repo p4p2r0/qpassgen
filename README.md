@@ -15,7 +15,7 @@ A cryptographically secure password generator.
 Passwords generated today can end up stored or intercepted for years, so they need to hold up against attacks that don't exist yet, not just the ones that do. Grover's algorithm halves effective key strength on a quantum computer, so the default entropy target is set to 256 bits. That leaves 128 bits post-quantum, out of reach of any brute-force attack, classical or quantum, for the foreseeable future.
 
 ## Usage
-```bash
+```
 usage: main.py [-h] [-l LENGTH] [-e ENTROPY] [-n COUNT] [--no-lower] [--no-upper] [--no-digits] [--no-symbols] [--exclude-ambiguous] [--quiet] [--clipboard]
                [--clear-after SECONDS]
 
